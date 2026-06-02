@@ -1,3 +1,5 @@
+# Logs
+
 logs
 *.log
 npm-debug.log*
@@ -6,18 +8,68 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
+
 node_modules
+
+# Build Output
+
 dist
 dist-ssr
+
+# Local Environment
+
 *.local
+.env
+.env.*
+
+# IDE
 
 .vscode/*
 !.vscode/extensions.json
 .idea
+
+# OS
+
 .DS_Store
+
+# Visual Studio
+
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-.env
+
+# Terraform
+
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfplan
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform CLI Config
+
+.terraformrc
+terraform.rc
+
+# AWS Credentials
+
+.aws/
+
+# SSH Keys
+
+*.pem
+*.key
+
+# Temporary Files
+
+*.tmp
+*.bak
