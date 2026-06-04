@@ -5,28 +5,36 @@ agent any
 
 stages {
 
-    stage('Build Docker Image') {
-
+    stage('Clone') {
         steps {
-
-            bat 'docker build -t northpeak .'
-
+            echo 'Cloning Repository...'
+            checkout scm
         }
-
     }
 
-    stage('Run Docker Container') {
-
+    stage('Build Docker Image') {
         steps {
-
-            bat 'docker stop northpeak-container || exit 0'
-
-            bat 'docker rm northpeak-container || exit 0'
-
-            bat 'docker run -d --name northpeak-container -p 8081:80 northpeak'
-
+            echo 'Building Docker Image...'
+            bat 'docker build -t northpeak-website .'
         }
+    }
 
+    stage('List Docker Images') {
+        steps {
+            bat 'docker images'
+        }
+    }
+
+}
+
+post {
+
+    success {
+        echo 'Pipeline Successful!'
+    }
+
+    failure {
+        echo 'Pipeline Failed!'
     }
 
 }
