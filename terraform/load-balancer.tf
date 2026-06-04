@@ -1,8 +1,8 @@
 resource "aws_lb_target_group" "web_tg" {
 
-  name     = "northpeak-tg"
+  name = "northpeak-tg"
 
-  port     = 80
+  port = 80
 
   protocol = "HTTP"
 

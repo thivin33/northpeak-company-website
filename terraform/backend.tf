@@ -2,7 +2,7 @@ terraform {
 
   backend "s3" {
 
-    bucket = "northpeak-terraform-state-123456"
+    bucket = "northpeak-terraform-state"
 
     key = "prod/terraform.tfstate"
 

@@ -14,4 +14,6 @@ systemctl enable amazon-cloudwatch-agent
 
 usermod -aG docker ubuntu
 
-docker run -d -p 80:80 nginx
+docker pull thivin33/northpeak-website:latest
+
+docker run -d -p 80:80 --name northpeak thivin33/northpeak-website:latest

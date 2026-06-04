@@ -22,8 +22,8 @@ resource "aws_cloudwatch_metric_alarm" "high_cpu" {
     AutoScalingGroupName = aws_autoscaling_group.web_asg.name
   }
   alarm_actions = [
-  aws_sns_topic.alerts.arn
-]
+    aws_sns_topic.alerts.arn
+  ]
 }
 
 resource "aws_cloudwatch_dashboard" "main" {

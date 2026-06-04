@@ -10,19 +10,19 @@ resource "aws_security_group" "web_sg" {
     cidr_blocks = ["110.224.87.96/32"]
   }
 
-ingress {
+  ingress {
 
-  description = "HTTP from ALB"
+    description = "HTTP from ALB"
 
-  from_port = 80
-  to_port   = 80
+    from_port = 80
+    to_port   = 80
 
-  protocol = "tcp"
+    protocol = "tcp"
 
-  security_groups = [
-    aws_security_group.alb_sg.id
-  ]
-}
+    security_groups = [
+      aws_security_group.alb_sg.id
+    ]
+  }
 
   egress {
     from_port   = 0
