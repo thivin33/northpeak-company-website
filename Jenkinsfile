@@ -5,7 +5,7 @@ agent any
 
 stages {
 
-    stage('Clone') {
+    stage('Clone Repository') {
         steps {
             echo 'Cloning Repository...'
             checkout scm
@@ -21,6 +21,7 @@ stages {
 
     stage('List Docker Images') {
         steps {
+            echo 'Listing Docker Images...'
             bat 'docker images'
         }
     }
