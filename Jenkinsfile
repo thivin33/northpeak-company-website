@@ -1,42 +1,46 @@
 pipeline {
 
-    agent any
+```
+agent any
 
-    stages {
+environment {
+    IMAGE_NAME = "thivin33/northpeak-website"
+}
 
-        stage('Clone Repository') {
-            steps {
-                echo 'Cloning Repository...'
-                checkout scm
-            }
+stages {
+
+    stage('Checkout') {
+        steps {
+            checkout scm
         }
-
-        stage('Build Docker Image') {
-            steps {
-                echo 'Building Docker Image...'
-                bat 'docker build -t northpeak-website .'
-            }
-        }
-
-        stage('List Docker Images') {
-            steps {
-                echo 'Listing Docker Images...'
-                bat 'docker images'
-            }
-        }
-
     }
 
-    post {
-
-        success {
-            echo 'Pipeline Successful!'
+    stage('Build Docker Image') {
+        steps {
+            bat "docker build -t %IMAGE_NAME% ."
         }
-
-        failure {
-            echo 'Pipeline Failed!'
-        }
-
     }
+
+    stage('Docker Login') {
+        steps {
+            withCredentials([usernamePassword(
+                credentialsId: 'dockerhub-creds',
+                usernameVariable: 'DOCKER_USER',
+                passwordVariable: 'DOCKER_PASS'
+            )]) {
+
+                bat "docker login -u %DOCKER_USER% -p %DOCKER_PASS%"
+            }
+        }
+    }
+
+    stage('Push Image') {
+        steps {
+            bat "docker push %IMAGE_NAME%"
+        }
+    }
+
+}
+```
 
 }
