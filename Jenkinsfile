@@ -1,44 +1,42 @@
 pipeline {
 
-```
-agent any
+    agent any
 
-stages {
+    stages {
 
-    stage('Clone Repository') {
-        steps {
-            echo 'Cloning Repository...'
-            checkout scm
+        stage('Clone Repository') {
+            steps {
+                echo 'Cloning Repository...'
+                checkout scm
+            }
         }
-    }
 
-    stage('Build Docker Image') {
-        steps {
-            echo 'Building Docker Image...'
-            bat 'docker build -t northpeak-website .'
+        stage('Build Docker Image') {
+            steps {
+                echo 'Building Docker Image...'
+                bat 'docker build -t northpeak-website .'
+            }
         }
-    }
 
-    stage('List Docker Images') {
-        steps {
-            echo 'Listing Docker Images...'
-            bat 'docker images'
+        stage('List Docker Images') {
+            steps {
+                echo 'Listing Docker Images...'
+                bat 'docker images'
+            }
         }
+
     }
 
-}
+    post {
 
-post {
+        success {
+            echo 'Pipeline Successful!'
+        }
 
-    success {
-        echo 'Pipeline Successful!'
+        failure {
+            echo 'Pipeline Failed!'
+        }
+
     }
-
-    failure {
-        echo 'Pipeline Failed!'
-    }
-
-}
-```
 
 }
